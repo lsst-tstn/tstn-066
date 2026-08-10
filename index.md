@@ -4,13 +4,13 @@
 
 This technical note describes the hardware and software that make up the Rubin Calibration System (CalSys). It is intended as a reference for anyone working with CalSys hardware, its control software, or running test cases to produce calibration products, and as an entry point to the more detailed design documents for each subsystem. Throughout this document, there are links to other tech notes that go into much more detail for each subsystem.
 
-The Rubin CalSys comprises all of the hardware and software needed to provide the light sources required to produce the calibration products needed to achieve Rubin's science goals. What is described below does not include the Calibration pipeline, which comprises the software packages needed to build the calibration products from CalSys data. That can be found at [lsst.cp.pipe](https://pipelines.lsst.io/modules/lsst.cp.pipe/index.html).
+The Rubin CalSys comprises all of the hardware and software needed to provide the illumination patterns required to produce the calibration products needed to achieve Rubin's science goals. The Calibration pipeline, which comprises the software packages needed to build the calibration products from CalSys data, can be found at [lsst.cp.pipe](https://pipelines.lsst.io/modules/lsst.cp.pipe/index.html).
 
 The Rubin Calibration System has three main components:
 
 1. **Auxiliary Telescope** — measures the atmosphere above Cerro Pachón, right near Rubin on "calibration hill".
 2. **Flatfield System** — delivers white-light and monochromatic flat fields.
-3. **Collimated Beam Projector (CBP)** — measures the throughput of the Rubin optical system (Telescope + Camera) without the scattered light associated with flatfields.
+3. **Collimated Beam Projector (CBP)** — sends a collimated beam of light directly at the Rubin optical system (Telescope + Camera) without the scattered light associated with flatfields.
 
 Together with Instrument Signal Removal (ISR) and FGCM, developed by the Rubin Data Management (DM) team, these subsystems allow us to meet our required calibration needs. The subsections below (MTCalSys and ATCalSys) break each of these components down into their constituent hardware.
 
@@ -24,30 +24,30 @@ MTCalSys is the calibration hardware associated with the Simonyi Survey Telescop
 
 - **Flatfield Projector** ([TSTN-060](https://tstn-060.lsst.io)) - projects white-light and monochromatic flat fields onto the Calibration Screen, illuminating the Camera's full field of view. Includes the projector optics, LED sources, fiber spectrographs, linear stages, and the electrometer + photodiode pair used to monitor the illumination in real time.
 - **Calibration Screen** ([TSTN-057](https://tstn-057.lsst.io)) - the large diffusing screen mounted in the dome that the Flatfield Projector illuminates; its panels and actuator allow it to be deployed into and stowed out of the beam.
-- **Reflector** ([TSTN-049](https://tstn-049.lsst.io)) - the fold mirror (and its cover) used to direct the flat-field beam path into the telescope.
+- **Reflector** ([TSTN-049](https://tstn-049.lsst.io)) - aspheric mirror mounted on the top of the camera. When the TMA is aligned with the flatfield projector, it directs the illumination onto the calibration screen.
 
 **Collimated Beam Projector (CBP) system**
 
-- **CBP** ([TSTN-067](https://tstn-067.lsst.io)) - projects a small, collimated beam through the full optical system (telescope + camera) to measure system throughput directly, without the scattered-light contribution present in screen flats. Includes the CBP unit itself, its calibration system, timer, electrometer + photodiode, and electronics cabinet.
-- **Tunable Laser** ([TSTN-065](https://tstn-065.lsst.io)) - the wavelength-tunable light source that feeds the CBP, allowing throughput to be measured as a function of wavelength across the survey passbands. Includes the main laser, Stubbs laser, optical fibers, thermal system, and supporting electronics and enclosure.
+- **CBP** ([TSTN-067](https://tstn-067.lsst.io)) - projects a smaller collimated beam through the full optical system (telescope + camera) to measure system throughput directly, without the scattered-light contribution present in screen flats. Includes the CBP unit itself, its calibration system, timer, electrometer + photodiode, and electronics cabinet.
+- **Tunable Laser** ([TSTN-065](https://tstn-065.lsst.io)) - the wavelength-tunable light source that feeds both the CBP and the flatfield projector. Includes the laser, optical fibers, thermal system, and supporting electronics and enclosure.
 
 ## ATCalSys
 
-ATCalSys is the calibration hardware associated with the Auxiliary Telescope, which is used to measure the atmospheric transmission above Cerro Pachón. It covers the telescope itself, its dome and building, its instrument (LATISS), and the calibration system used to illuminate it.
+ATCalSys is the calibration hardware associated with the Auxiliary Telescope, which is used to measure the atmospheric transmission above Cerro Pachón. In some sense, the whole Auxiliary Telescope is part of the ATCalSys, however, that term is usually reserved for the hardware used to take flat-field images with LATISS. 
 
 Many details of the Auxiliary Telescope can be found in [Docushare](https://docushare.lsst.org/docushare/dsweb/View/Collection-273).
 
 ![ATCalSys taxonomy](diagrams/atcalsys_taxonomy.svg)
 
-- **Telescope** — the Auxiliary Telescope optics used to observe standard stars and monitor atmospheric transmission above Cerro Pachón.
-- **Dome + Building** — the enclosure and building infrastructure that house the Auxiliary Telescope.
-- **Instrument (LATISS)** — the Auxiliary Telescope's instrument, LATISS (LSST Atmospheric Transmission Imager and Slitless Spectrograph), used to obtain imaging and slitless spectroscopy of standard stars.
-- **ATCalSys (Calibration System)** ([TSTN-032](https://tstn-032.lsst.io)) - the onboard calibration hardware used to flat-field and otherwise calibrate LATISS itself.
+- **Telescope** — the Auxiliary Telescope is a 1.2m Ritchey-Chretien, getting a second home after its life as Calypso on Kitt Peak. 
+- **Dome + Building** — the building infrastructure has a 9.3m diameter and was built by Ash-Dome
+- **Instrument (LATISS)** — LSST Atmospheric Transmission Imager and Slitless Spectrograph, used to obtain imaging and slitless spectroscopy of standard stars.
+- **ATCalSys (Calibration System)** ([TSTN-032](https://tstn-032.lsst.io)) - the hardware used to illuminate the flat-field screen in the telescope for calibration of LATISS and the telescope.
 
 
 ## Operations Concept
 
-The AuxTel is operated every night the sky is clear enough. It is now operated with the spectrograph mode. During the weekends, calibrations are run.
+The AuxTel is operated every night the sky is clear enough, measuring the spectra of standard stars throughout the night. With this data, the atmospheric transmission is measured at a range of times and airmasses . During the weekends, calibrations are run.
 
 At the Simonyi Telescope, calibrations are taken on several time scales:
 * **Daily**:
