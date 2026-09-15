@@ -31,6 +31,11 @@ MTCalSys is the calibration hardware associated with the Simonyi Survey Telescop
 - **CBP** ([TSTN-067](https://tstn-067.lsst.io)) - projects a smaller collimated beam through the full optical system (telescope + camera) to measure system throughput directly, without the scattered-light contribution present in screen flats. Includes the CBP unit itself, its calibration system, timer, electrometer + photodiode, and electronics cabinet. It sits on a platform above the calibration screen. The CBP electronics cabinet ([TSTN-069](https://tstn-069.lsst.io)) sits below the Tunable Laser Enclosure on a lower platform.
 - **Tunable Laser** ([TSTN-065](https://tstn-065.lsst.io)) - the wavelength-tunable light source that feeds both the CBP and the flatfield projector. Includes the laser, optical fibers, thermal system, and supporting electronics and enclosure. This sits on a platform near the calibration screen, with 20~m fibers running to the CBP (above) and the Projector (center of screen). The Laser electronics cabinet ([TSTN-068](https://tstn-068.lsst.io)) sits below the Tunable Laser Enclosure.
 
+```{figure} overview_cabling.png
+
+Cabling overview of the MTCalSys.
+```
+
 ## ATCalSys
 
 ATCalSys is the calibration hardware associated with the Auxiliary Telescope, which is used to measure the atmospheric transmission above Cerro Pachón. In some sense, the whole Auxiliary Telescope is part of the ATCalSys, however, that term is usually reserved for the hardware used to take flat-field images with LATISS. 
