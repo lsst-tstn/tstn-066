@@ -6,11 +6,11 @@ This technical note describes the hardware and software that make up the Rubin C
 
 The Rubin CalSys comprises all of the hardware and software needed to provide the illumination patterns required to produce the calibration products needed to achieve Rubin's science goals. The Calibration pipeline, which comprises the software packages needed to build the calibration products from CalSys data, can be found at [lsst.cp.pipe](https://pipelines.lsst.io/modules/lsst.cp.pipe/index.html).
 
-The Rubin Calibration System has three main components:
+The Rubin Calibration System has three main functional components:
 
-1. **Auxiliary Telescope** — measures the atmosphere above Cerro Pachón, right near Rubin on "calibration hill".
-2. **Flatfield System** — delivers white-light and monochromatic flat fields.
-3. **Collimated Beam Projector (CBP)** — sends a collimated beam of light directly at the Rubin optical system (Telescope + Camera) without the scattered light associated with flatfields.
+1. **Auxiliary Telescope** — measures the atmosphere above Cerro Pachón, right near Rubin on "calibration hill". This comprises the ATCalSys.
+2. **Flatfield System** — delivers white-light and monochromatic flat fields. This is part of the MTCalSys.
+3. **Collimated Beam Projector (CBP)** — sends a collimated beam of light directly at the Rubin optical system (Telescope + Camera) without the scattered light associated with flatfields. This is part of the MTCalSys.
 
 Together with Instrument Signal Removal (ISR) and FGCM, developed by the Rubin Data Management (DM) team, these subsystems allow us to meet our required calibration needs. The subsections below (MTCalSys and ATCalSys) break each of these components down into their constituent hardware.
 
@@ -22,14 +22,14 @@ MTCalSys is the calibration hardware associated with the Simonyi Survey Telescop
 
 **Flatfield System**
 
-- **Flatfield Projector** ([TSTN-060](https://tstn-060.lsst.io)) - projects white-light and monochromatic flat fields onto the Calibration Screen, illuminating the Camera's full field of view. Includes the projector optics, LED sources, fiber spectrographs, linear stages, and the electrometer + photodiode pair used to monitor the illumination in real time.
-- **Calibration Screen** ([TSTN-057](https://tstn-057.lsst.io)) - the large diffusing screen mounted in the dome that the Flatfield Projector illuminates; its panels and actuator allow it to be deployed into and stowed out of the beam.
+- **Flatfield Projector** ([TSTN-060](https://tstn-060.lsst.io)) - projects white-light and monochromatic flat fields onto the Calibration Screen, illuminating the Camera's full field of view. Includes the projector optics, LED sources, fiber spectrographs, linear stages, and the electrometer + photodiode pair used to monitor the illumination in real time. It sits in the center of the Calibration screen. The projector electronics cabinet ([TSTN-042](https://tstn-042.lsst.io)) is mounted to the screen structure about 3 meters below the center of the screen.
+- **Calibration Screen** ([TSTN-057](https://tstn-057.lsst.io)) - the large diffusing screen mounted in the dome that the Flatfield Projector illuminates; its panels and actuator allow it to be deployed into and stowed out of alignment with the TMA.
 - **Reflector** ([TSTN-049](https://tstn-049.lsst.io)) - aspheric mirror mounted on the top of the camera. When the TMA is aligned with the flatfield projector, it directs the illumination onto the calibration screen.
 
 **Collimated Beam Projector (CBP) system**
 
-- **CBP** ([TSTN-067](https://tstn-067.lsst.io)) - projects a smaller collimated beam through the full optical system (telescope + camera) to measure system throughput directly, without the scattered-light contribution present in screen flats. Includes the CBP unit itself, its calibration system, timer, electrometer + photodiode, and electronics cabinet.
-- **Tunable Laser** ([TSTN-065](https://tstn-065.lsst.io)) - the wavelength-tunable light source that feeds both the CBP and the flatfield projector. Includes the laser, optical fibers, thermal system, and supporting electronics and enclosure.
+- **CBP** ([TSTN-067](https://tstn-067.lsst.io)) - projects a smaller collimated beam through the full optical system (telescope + camera) to measure system throughput directly, without the scattered-light contribution present in screen flats. Includes the CBP unit itself, its calibration system, timer, electrometer + photodiode, and electronics cabinet. It sits on a platform above the calibration screen. The CBP electronics cabinet ([TSTN-069](https://tstn-069.lsst.io)) sits below the Tunable Laser Enclosure on a lower platform.
+- **Tunable Laser** ([TSTN-065](https://tstn-065.lsst.io)) - the wavelength-tunable light source that feeds both the CBP and the flatfield projector. Includes the laser, optical fibers, thermal system, and supporting electronics and enclosure. This sits on a platform near the calibration screen, with 20~m fibers running to the CBP (above) and the Projector (center of screen). The Laser electronics cabinet ([TSTN-068](https://tstn-068.lsst.io)) sits below the Tunable Laser Enclosure.
 
 ## ATCalSys
 
@@ -47,8 +47,10 @@ Many details of the Auxiliary Telescope can be found in [Docushare](https://docu
 
 ## Operations Concept
 
+### AuxTel
 The AuxTel is operated every night the sky is clear enough, measuring the spectra of standard stars throughout the night. With this data, the atmospheric transmission is measured at a range of times and airmasses . During the weekends, calibrations are run.
 
+### MTCalSys
 At the Simonyi Telescope, calibrations are taken on several time scales:
 * **Daily**:
     * Daily Checkout is performed during the daytime to confirm the operation of the Reflector, temperature sensors for the Laser and CBP (ESS), the Electrometer, FiberSpectrograph, and Projector and LEDs. The results of this test is reported in [TimeSquare](https://usdf-rsp.slac.stanford.edu/times-square/github/lsst-so/reports-performance-summary/sst/calsys/Daily_CalSys-TimeSquare)
